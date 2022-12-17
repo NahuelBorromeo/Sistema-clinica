@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <header th:replace="layout/layout :: header"></header>
+    </br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center" th:text="${titulo}"></h1>
+                <div class="card-body">
+                    <form th:action="@{/formPaciente}" th:object="${paciente}" method="post">
+                        <input type="hidden" th:field="*{id}" th:value="${paciente.id}"/>
+                        <div class="form-group">
+                            <label>Nombre :</label>
+                            <input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido :</label>
+                            <input type="text" th:field="*{apellido}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono :</label>
+                            <input type="number" th:field="*{telefono}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Email :</label>
+                            <input type="email" th:field="*{email}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Sexo :</label>
+                            <select class="form-control" th:field="*{sexo}">
+                                <option th:value="Masculino">Masculino</option>
+                                <option th:value="Femenino">Femenino</option>
+                                <option th:value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Documento :</label>
+                            <input type="number" th:field="*{documento}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}"></small>
+                        </div>
+                        <div class="box-footer">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+                            <input type="button" id="cancelar" value="Cancelar" class="btn btn-secondary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="layout/layout :: footer"></footer>
+    <script type="text/javascript">
+        document.getElementById("cancelar").onclick = function () {
+            location.href = "http://localhost:8080/listarPacientes";
+        };
+    </script>
+</body>
+</html>

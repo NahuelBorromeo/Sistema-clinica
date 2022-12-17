@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <header th:replace="layout/layout :: header"></header>
+    </br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center" th:text="${titulo}"></h1>
+                <div class="card-body">
+                    <form th:action="@{/formCita}" th:object="${cita}" method="post">
+                        <input type="hidden" th:field="*{id}" th:value="${cita.id}"/>
+                        <div class="form-group">
+                            <label>Documento del paciente :</label>
+                            <input type="number" th:field="*{documento}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Número del doctor :</label>
+                            <input type="number" th:field="*{nrodoctor}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('nrodoctor')}" th:errors="*{nrodoctor}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha :</label>
+                            <input type="date" th:field="*{fecha}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Hora :</label>
+                            <input type="time" th:field="*{hora}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('hora')}" th:errors="*{hora}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Especialidad :</label>
+                            <select class="form-control" th:field="*{especialidad}">
+                                <option th:value="Radiología">Radiología</option>
+                                <option th:value="Neurocirugía">Neurocirugía</option>
+                                <option th:value="Traumatología">Traumatología</option>
+                                <option th:value="Cardiología">Cardiología</option>
+                                <option th:value="Gastroenterología">Gastroenterología</option>
+                                <option th:value="Ginecología_y_obstetricia">Ginecología y obstetricia</option>
+                                <option th:value="Dermatología">Dermatología</option>
+                                <option th:value="Medicina_general">Medicina general</option>
+                                <option th:value="Nutrición">Nutrición</option>
+                                <option th:value="Oftalmología">Oftalmología</option>
+                                <option th:value="Otorrinolaringología">Otorrinolaringología</option>
+                                <option th:value="Psicología">Psicología</option>
+                                <option th:value="Reumatología">Reumatología</option>
+                                <option th:value="Urología">Urología</option>
+                            </select>
+                        </div>
+                        <div class="box-footer">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+                            <input type="button" id="cancelar" value="Cancelar" class="btn btn-secondary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="layout/layout :: footer"></footer>
+    <script type="text/javascript">
+        document.getElementById("cancelar").onclick = function () {
+            location.href = "http://localhost:8080/listarCitas";
+        };
+    </script>
+</body>
+</html>

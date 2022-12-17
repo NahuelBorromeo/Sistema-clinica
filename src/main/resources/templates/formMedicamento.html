@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <header th:replace="layout/layout :: header"></header>
+    </br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center" th:text="${titulo}"></h1>
+                <div class="card-body">
+                    <form th:action="@{/formMedicamento}" th:object="${medicamento}" method="post">
+                        <input type="hidden" th:field="*{id}" th:value="${medicamento.id}"/>
+                        <div class="form-group">
+                            <label>Nombre científico:</label>
+                            <input type="text" th:field="*{nombreCientifico}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('nombreCientifico')}" th:errors="*{nombreCientifico}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre Comercial :</label>
+                            <input type="text" th:field="*{nombreComercial}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('nombreComercial')}" th:errors="*{nombreComercial}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Dosis :</label>
+                            <input type="number" th:field="*{dosis}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('dosis')}" th:errors="*{dosis}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Laboratorio :</label>
+                            <input type="text" th:field="*{laboratorio}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('laboratorio')}" th:errors="*{laboratorio}"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Precio :</label>
+                            <input type="number" th:field="*{precio}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+                        </div>
+                        <div class="box-footer">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+                            <input type="button" id="cancelar" value="Cancelar" class="btn btn-secondary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="layout/layout :: footer"></footer>
+    <script type="text/javascript">
+        document.getElementById("cancelar").onclick = function () {
+            location.href = "http://localhost:8080/listarMedicamentos";
+        };
+    </script>
+</body>
+</html>
